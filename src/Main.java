@@ -1,5 +1,7 @@
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.YearMonth;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -63,6 +65,11 @@ public class Main extends javax.swing.JFrame {
         jSpinTahun.setVerifyInputWhenFocusTarget(false);
 
         btnHitugPerhitunganHari.setText("Hitung");
+        btnHitugPerhitunganHari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHitugPerhitunganHariActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Hari Pertama:");
 
@@ -158,6 +165,42 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHitugPerhitunganHariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitugPerhitunganHariActionPerformed
+        int year = (int) jSpinTahun.getValue(); 
+        String namaBulanIndo = (String) cbbBulan.getSelectedItem(); 
+        String namaBulanEn = "";
+
+        // Mengkonversi dari nama bulan Indonesia ke Inggris
+        switch (namaBulanIndo.toUpperCase()) {
+            case "JANUARI" -> namaBulanEn = "JANUARY";
+            case "FEBRUARI" -> namaBulanEn = "FEBRUARY";
+            case "MARET" -> namaBulanEn = "MARCH";
+            case "APRIL" -> namaBulanEn = "APRIL";
+            case "MEI" -> namaBulanEn = "MAY";
+            case "JUNI" -> namaBulanEn = "JUNE";
+            case "JULI" -> namaBulanEn = "JULY";
+            case "AGUSTUS" -> namaBulanEn = "AUGUST";
+            case "SEPTEMBER" -> namaBulanEn = "SEPTEMBER";
+            case "OKTOBER" -> namaBulanEn = "OCTOBER";
+            case "NOVEMBER" -> namaBulanEn = "NOVEMBER";
+            case "DESEMBER" -> namaBulanEn = "DECEMBER";
+            default -> System.out.println("Bulan tidak valid.");
+        }
+
+        Month month = Month.valueOf(namaBulanEn); 
+        YearMonth yearMonth = YearMonth.of(year, month);
+        int daysInMonth = yearMonth.lengthOfMonth(); 
+        
+        // Tampilkan ke label
+        lblHasilPerhitunganHari.setText("Jumlah hari: " + daysInMonth);
+        
+        // Mencari hari pertama dan terakhir pada bulan yang dipilih
+        LocalDate firstDay = yearMonth.atDay(1);
+        LocalDate lastDay = yearMonth.atEndOfMonth(); 
+        lblHasilHariPertama.setText(firstDay.getDayOfWeek().toString()); 
+        lblHasilHariTerakhir.setText(lastDay.getDayOfWeek().toString());
+    }//GEN-LAST:event_btnHitugPerhitunganHariActionPerformed
 
     /**
      * @param args the command line arguments

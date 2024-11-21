@@ -267,7 +267,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHitugPerhitunganHariActionPerformed
 
     private void btnHitungSelisihHariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungSelisihHariActionPerformed
+        Date startDate = jCalendar1.getDate();
+        Date endDate = jCalendar2.getDate(); 
+        long diffInMillis = Math.abs(endDate.getTime() - startDate.getTime()); 
+        long diffInDays = diffInMillis / (24 * 60 * 60 * 1000); 
         
+        lblHasilSelisihHari.setText(diffInDays + " hari");
     }//GEN-LAST:event_btnHitungSelisihHariActionPerformed
 
     /**
